@@ -1,7 +1,10 @@
-'''
-Streamlit Web App to Display Predicted Recipes from the Smart Recipe Generator Function,
-Based on the User Given Ingredients List
-'''
+import warnings
+warnings.filterwarnings('ignore')
+
+
+#Streamlit Web App to Display Predicted Recipes from the Smart Recipe Generator Function,
+#Based on the User Given Ingredients List
+
 
 import streamlit as st   #Streamlit Library to create Web App
 from prediction import predictRecipes   #Smart Recipe Generator Prediction Function
@@ -10,6 +13,7 @@ from prediction import predictRecipes   #Smart Recipe Generator Prediction Funct
 st.title('Smart Recipe Generator')   #Web App Title
 st.write(' ')
 ingredients = st.text_input('Enter Ingredients (comma-separated):')   #User Input Ingredients
+st.write(' ')
 
 
 if st.button('Predict Recipes'):  #Button to Start Prediction
@@ -25,6 +29,20 @@ if st.button('Predict Recipes'):  #Button to Start Prediction
         i, middle, j = st.columns(3)
         with middle:
             st.image(predictedOutput['URLs'][recipeNum], width=300)   #Display Recipe Image
+        
+        st.divider()
+
+        st.subheader("Cuisine")
+        recipeCuisine = predictedOutput['Cuisines'][recipeNum]   #Display Recipe Cuisine
+        st.write(recipeCuisine)
+
+        st.divider()
+
+        st.subheader("Time")
+        recipeTime = predictedOutput['TotalTimeInMins'][recipeNum]   #Display Time Taken
+        st.write(recipeTime + " minutes")
+
+        st.divider()
 
         st.subheader("Ingredients")
         recipeIngredients = predictedOutput['Recipes'][recipeNum][1].split(',')   #Display Recipe Ingredients
@@ -32,6 +50,8 @@ if st.button('Predict Recipes'):  #Button to Start Prediction
         for i in recipeIngredients:
             s += "- " + i + "\n"
         st.markdown(s)
+
+        st.divider()
 
         st.subheader("Instructions")
         recipeInstructions = predictedOutput['Recipes'][recipeNum][2]   #Display Recipe Instructions
@@ -51,6 +71,7 @@ if st.button('Predict Recipes'):  #Button to Start Prediction
         displayRecipe(3) #Display Fourth Predicted Recipe Details
 
 
+# Footer Note
 footer="""<style>
 .footer {
 position: fixed;
