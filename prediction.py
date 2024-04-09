@@ -3,9 +3,9 @@ import joblib
 
 def predictRecipes(inputIngredients):
 
-    classifier = joblib.load('C:/Users/aacas/OneDrive/Desktop/Aacash/Github Files/SRGwIC/recipe_classifier.pkl')
-    vectorizer = joblib.load("C:/Users/aacas/OneDrive/Desktop/Aacash/Github Files/SRGwIC/recipe_vectorizer.pkl")
-    recipeDF = joblib.load("C:/Users/aacas/OneDrive/Desktop/Aacash/Github Files/SRGwIC/CIFD.pkl")
+    classifier = joblib.load('recipe_classifier.pkl')
+    vectorizer = joblib.load("recipe_vectorizer.pkl")
+    recipeDF = joblib.load("CIFD.pkl")
 
     inputText = inputIngredients.split(',')
     inputText = " ".join(inputText)
